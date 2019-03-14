@@ -33,6 +33,7 @@
   ```
 
   js 用工厂模式创建对象，这是JavaScript的一种延伸。
+  ⚠️:不过这里有个问题就是用工厂创建的方法没有办法使用instanceof 去比较类型，后期回更新出一个JavaScript的面向对象的文档
 
   ```js
   function createBook(name,time,type){
@@ -47,3 +48,4 @@
     return o;
   }
   ```
+  
