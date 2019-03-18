@@ -7,8 +7,8 @@ common javascript design patterns
 ###全书分为：
 - 设计模式
   - [创建型设计模式](/part1/README.md)
-    - [简单工厂模式]()
-    - [工厂方法模式]()
+    - [简单工厂模式](/part1/simple_factory.md)
+    - [工厂方法模式](/par1/factory_function.md)
     - [抽象工厂模式]()
     - [建造者模式](P
     - [原型模式]()
