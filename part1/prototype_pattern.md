@@ -70,5 +70,4 @@ var test1 = prototypeExtend({
 test.swim()
 test1.swim()
 
-//这里有个问题，
 ```
