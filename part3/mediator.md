@@ -5,7 +5,7 @@
 //   提供注销方法
   //可想想js 的事件绑定
 //观察者
-var Observer = (function(){
+var mediator = (function(){
   var _message = [];
   return {
     regist:function(type,fn){
@@ -15,7 +15,7 @@ var Observer = (function(){
       }
         _message[type].push(fn)
     },
-    fire:function(type,args){
+     send:function(type,args){
       if(typeof _message[type] === 'undefined'){
         return
       }
@@ -27,21 +27,17 @@ var Observer = (function(){
         _message[type][fn].call(this,event)
       }
     },
-    remove:function(type,fn){
-      if(_message[type] instanceof Array){
-        for(let list in _message[type]){
-          _message[type][list]===fn && _message[type][list].splice(list,1)
-        }
-     }
-    },
   }
 })()
 
 //使用
+mediator.regist('test',(e)=>{console.log(e)})
+mediator.send('test')
+
+
 //A
-Observer.regist('Atest',(e)=>{console.log(e)})
-Observer.fire('Btest')
+mediator.regist('test',(e)=>{console.log(e)})
 //B
-Observer.regist('Btest',(e)=>{console.log(e)})
-Observer.fire('Atest')
+mediator.send('test')
+
 ```
