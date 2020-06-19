@@ -1,1 +1,15 @@
 language: node_js
+before_install: 
+  - npm i
+cache: npm
+
+script:
+  - npm run build
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: 4f7806a47fa82950052270357937fc7a4c129375  # Set in the settings page of your repository, as a secure variable
+  keep_history: true
+  on:
+    branch: master
