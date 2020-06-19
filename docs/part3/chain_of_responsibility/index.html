@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" />
+    
+
+    <title>
+        
+          part3/chain_of_responsibility - JS 设计模式练习
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="/css/book.css">
+
+    
+<script src="/js/book.js"></script>
+
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('.book-content img')
+})
+</script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+
+<div class="book-container">
+  <div class="book-sidebar">
+    <div class="book-brand">
+  <a href="/">
+    <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4">
+    <span>JS 设计模式练习</span>
+  </a>
+</div>
+    <div class="book-menu">
+  <ul>
+<li><a href="/part1/README">创建型设计模式</a><ul>
+<li><a href="/part1/simple_factory">简单工厂模式</a></li>
+<li><a href="/part1/factory_function">工厂方法模式</a></li>
+<li><a href="/part1/abstract_factory">抽象工厂模式</a></li>
+<li><a href="/part1/builder_pattern">建造者模式</a></li>
+<li><a href="/part1/prototype_pattern">原型模式</a></li>
+<li><a href="/part1/singleton_pattern">单例模式</a></li>
+</ul>
+</li>
+<li><a href="/part2/README">结构型设计模式</a><ul>
+<li><a href="/part2/facede">外观模式</a></li>
+<li><a href="/part2/adapter">适配器模式</a> </li>
+<li><a href="/part2/decorator">装饰者模式</a> </li>
+<li><a href="/part2/proxy">代理模式</a></li>
+<li><a href="/part2/adapter">桥接模式</a></li>
+<li><a href="/part2/composite">组合模式</a></li>
+<li><a href="/part2/flyweight">享元模式</a></li>
+</ul>
+</li>
+<li><a href="/part3/README">行为设计模式</a><ul>
+<li><a href="/part3/templete">模版方法模式</a></li>
+<li><a href="/part3/Observer">观察者模式</a></li>
+<li><a href="/part3/state">状态模式</a></li>
+<li>❎ <a href="/part3/strategy">策略模式</a></li>
+<li><a href="/part3/chain_of_responsibility">职责链模式</a></li>
+<li><a href="/part3/command">命令模式</a></li>
+<li><a href="/part3/vistor">访问者模式</a></li>
+<li><a href="/part3/mediator">中介者模式</a></li>
+<li><a href="/part3/memento">备忘录模式</a></li>
+<li><a href="/part3/iterator">迭代器模式</a></li>
+<li><a href="/part3/interpreter">解释器模式</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+
+<script src="/js/book-menu.js"></script>
+
+  </div>
+
+  <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+  <div class="sidebar-toggle-inner"></div>
+</div>
+
+<script>
+function add_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.add('show')  
+}
+
+function remove_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.remove('show')
+}
+
+function sidebar_toggle() {
+    let sidebar_toggle = document.querySelector('.sidebar-toggle')
+    let sidebar = document.querySelector('.book-sidebar')
+    let content = document.querySelector('.off-canvas-content')
+    if (sidebar_toggle.classList.contains('extend')) { // show
+        sidebar_toggle.classList.remove('extend')
+        sidebar.classList.remove('hide')
+        content.classList.remove('extend')
+    }
+    else { // hide
+        sidebar_toggle.classList.add('extend')
+        sidebar.classList.add('hide')
+        content.classList.add('extend')
+    }
+}
+</script>
+
+  <div class="off-canvas-content">
+    <div class="columns">
+      <div class="column col-10 col-lg-12">
+        <div class="book-navbar">
+          <!-- For Responsive Layout -->
+
+<header class="navbar">
+  <section class="navbar-section">
+    <a onclick="open_sidebar()">
+      <i class="icon icon-menu"></i>
+    </a>
+  </section>
+</header>
+
+        </div>
+        <div class="book-content">
+          <div class="book-post">
+  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//请求=&gt;解析=&gt;页面渲染</span></span><br><span class="line"><span class="comment">//第一步发送请求</span></span><br><span class="line"><span class="keyword">var</span> sendData = <span class="function"><span class="keyword">function</span>(<span class="params">data,dealType,dom</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest()</span><br><span class="line">  url=<span class="string">'getData'</span></span><br><span class="line">  <span class="comment">//传送完成</span></span><br><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//检查状态码</span></span><br><span class="line">    <span class="keyword">if</span>((xhr.status&gt;=<span class="number">200</span>&amp;&amp;xhr.status&lt;<span class="number">300</span>)||xhr.status == <span class="number">304</span>)&#123;</span><br><span class="line">      dealData(xhr.responseText,dealType,dom)</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">      <span class="comment">//失败代码</span></span><br><span class="line">    &#125;</span><br><span class="line">  xhr.open(<span class="string">'get'</span>,url,data)</span><br><span class="line">  xhr.send(<span class="literal">null</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//解析返回数据</span></span><br><span class="line"><span class="keyword">var</span> dealData = <span class="function"><span class="keyword">function</span>(<span class="params">data,dealType,dom</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> dataType=<span class="built_in">Object</span>.prorotype.toString.call(data)</span><br><span class="line">  <span class="keyword">switch</span>(dealType)&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="string">'sug'</span>:</span><br><span class="line">    <span class="keyword">if</span>(dataType === <span class="string">"[object Array]"</span>)&#123;</span><br><span class="line">      <span class="keyword">return</span> createSug(data,dom)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(dataType === <span class="string">"[object Object]"</span>)&#123;</span><br><span class="line">      <span class="keyword">var</span> newData = [];</span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">of</span> data)newData.push(i)</span><br><span class="line">      <span class="keyword">return</span> createSug(newData,dom)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> createSug([data],dom)</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">'validate'</span>:</span><br><span class="line">    <span class="keyword">return</span> createValidataResult(data.dom);</span><br><span class="line">    <span class="keyword">break</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//渲染</span></span><br><span class="line"><span class="keyword">var</span> createSug = <span class="function"><span class="keyword">function</span>(<span class="params">data,dom</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> i = <span class="number">0</span>,len=data.length,html=<span class="string">''</span>;</span><br><span class="line">  <span class="keyword">for</span>(;i&lt;len;i++)&#123;</span><br><span class="line">    html +=<span class="string">'&lt;li&gt;'</span>+data[i]+<span class="string">'&lt;/li&gt;'</span></span><br><span class="line">  &#125;</span><br><span class="line">  dom.parentNode.getElementsByTagName(<span class="string">'ul'</span>)[<span class="number">0</span>].innerHtml = html;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> createValidataResult = <span class="function"><span class="keyword">function</span>(<span class="params">data,dom</span>)</span>&#123;</span><br><span class="line">  dom.parentNode.getElementsByTagName(<span class="string">'span'</span>)[<span class="number">0</span>].innerHTML=data; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</div>
+
+
+  <div class="book-comments">
+    
+<script src="https://utteranc.es/client.js"
+        repo="AngelName/javascript-design-pattern"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+
+
+  </div>
+
+
+
+<script src="/js/book-post.js"></script>
+
+        </div>
+      </div>
+      <div class="column col-2 hide-lg">
+        <div class="book-post-info">
+  
+    <div class="book-post-meta">
+
+  <div class="author">
+
+    <!-- Author image -->
+    <div class="author-img">
+      
+        <figure class="avatar avatar-lg">
+          <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" alt="...">
+        </figure>
+      
+    </div>
+
+    <!-- Author title -->
+    <div class="author-title">
+      <div>AngelName</div>
+      <div>2020-06-19</div>
+    </div>
+  </div>
+
+  
+
+  <div class="divider"></div>
+</div>
+  
+
+  <div class="book-tocbot">
+</div>
+<div class="book-tocbot-menu">
+  <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+  <a onclick="go_top()">Back to top</a>
+  <a onclick="go_bottom()">Go to bottom</a>
+</div>
+
+
+<script src="/js/book-toc.js"></script>
+
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+</div>
+
+</body>
+</html>
+
+
+<script src="/js/book.js"></script>
