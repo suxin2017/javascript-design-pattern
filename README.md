@@ -9,11 +9,11 @@ common javascript design patterns
 - 设计模式
   - [创建型设计模式](/part1/README.md)
     - [简单工厂模式](/part1/simple_factory.md)
-    - [工厂方法模式](/par1/factory_function.md)
-    - [抽象工厂模式](/par1/abstract_factory.md)
-    - [建造者模式](/par1/builder_pattern.md)
-    - [原型模式](/par1/prototype_pattern.md)
-    - [单例模式](/par1/singleton_pattern.md)
+    - [工厂方法模式](/part1/factory_function.md)
+    - [抽象工厂模式](/part1/abstract_factory.md)
+    - [建造者模式](/part1/builder_pattern.md)
+    - [原型模式](/part1/prototype_pattern.md)
+    - [单例模式](/part1/singleton_pattern.md)
     
   - [结构型设计模式](/part2/README.md)
     - [外观模式](/part2/facede.md)
