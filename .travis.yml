@@ -1,10 +1,9 @@
 language: node_js
 node_js:
-- 10
+  - 10
 cache: npm
 script:
-- npm install
-- npm run build
+  - hexo generate
 
 deploy:
   provider: pages
