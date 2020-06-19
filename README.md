@@ -4,7 +4,8 @@ common javascript design patterns
 这是一个关于JavaScript的设计模式文章
 总结练习张容明一书的JavaScript的设计模型
 
-###全书分为：
+### 全书分为：
+
 - 设计模式
   - [创建型设计模式](/part1/README.md)
     - [简单工厂模式](/part1/simple_factory.md)
@@ -13,7 +14,7 @@ common javascript design patterns
     - [建造者模式](/par1/builder_pattern.md)
     - [原型模式](/par1/prototype_pattern.md)
     - [单例模式](/par1/singleton_pattern.md)
-    -
+    
   - [结构型设计模式](/part2/README.md)
     - [外观模式](/part2/facede.md)
     - [适配器模式](/part2/adapter.md) 
