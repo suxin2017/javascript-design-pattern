@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" />
+    
+
+    <title>
+        
+          CODE_OF_CONDUCT - JS 设计模式练习
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="/css/book.css">
+
+    
+<script src="/js/book.js"></script>
+
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('.book-content img')
+})
+</script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+
+<div class="book-container">
+  <div class="book-sidebar">
+    <div class="book-brand">
+  <a href="/">
+    <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4">
+    <span>JS 设计模式练习</span>
+  </a>
+</div>
+    <div class="book-menu">
+  <ul>
+<li><a href="/part1/README">创建型设计模式</a><ul>
+<li><a href="/part1/simple_factory">简单工厂模式</a></li>
+<li><a href="/part1/factory_function">工厂方法模式</a></li>
+<li><a href="/part1/abstract_factory">抽象工厂模式</a></li>
+<li><a href="/part1/builder_pattern">建造者模式</a></li>
+<li><a href="/part1/prototype_pattern">原型模式</a></li>
+<li><a href="/part1/singleton_pattern">单例模式</a></li>
+</ul>
+</li>
+<li><a href="/part2/README">结构型设计模式</a><ul>
+<li><a href="/part2/facede">外观模式</a></li>
+<li><a href="/part2/adapter">适配器模式</a> </li>
+<li><a href="/part2/decorator">装饰者模式</a> </li>
+<li><a href="/part2/proxy">代理模式</a></li>
+<li><a href="/part2/adapter">桥接模式</a></li>
+<li><a href="/part2/composite">组合模式</a></li>
+<li><a href="/part2/flyweight">享元模式</a></li>
+</ul>
+</li>
+<li><a href="/part3/README">行为设计模式</a><ul>
+<li><a href="/part3/templete">模版方法模式</a></li>
+<li><a href="/part3/Observer">观察者模式</a></li>
+<li><a href="/part3/state">状态模式</a></li>
+<li>❎ <a href="/part3/strategy">策略模式</a></li>
+<li><a href="/part3/chain_of_responsibility">职责链模式</a></li>
+<li><a href="/part3/command">命令模式</a></li>
+<li><a href="/part3/vistor">访问者模式</a></li>
+<li><a href="/part3/mediator">中介者模式</a></li>
+<li><a href="/part3/memento">备忘录模式</a></li>
+<li><a href="/part3/iterator">迭代器模式</a></li>
+<li><a href="/part3/interpreter">解释器模式</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+
+<script src="/js/book-menu.js"></script>
+
+  </div>
+
+  <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+  <div class="sidebar-toggle-inner"></div>
+</div>
+
+<script>
+function add_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.add('show')  
+}
+
+function remove_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.remove('show')
+}
+
+function sidebar_toggle() {
+    let sidebar_toggle = document.querySelector('.sidebar-toggle')
+    let sidebar = document.querySelector('.book-sidebar')
+    let content = document.querySelector('.off-canvas-content')
+    if (sidebar_toggle.classList.contains('extend')) { // show
+        sidebar_toggle.classList.remove('extend')
+        sidebar.classList.remove('hide')
+        content.classList.remove('extend')
+    }
+    else { // hide
+        sidebar_toggle.classList.add('extend')
+        sidebar.classList.add('hide')
+        content.classList.add('extend')
+    }
+}
+</script>
+
+  <div class="off-canvas-content">
+    <div class="columns">
+      <div class="column col-10 col-lg-12">
+        <div class="book-navbar">
+          <!-- For Responsive Layout -->
+
+<header class="navbar">
+  <section class="navbar-section">
+    <a onclick="open_sidebar()">
+      <i class="icon icon-menu"></i>
+    </a>
+  </section>
+</header>
+
+        </div>
+        <div class="book-content">
+          <div class="book-post">
+  <h1 id="Contributor-Covenant-Code-of-Conduct"><a href="#Contributor-Covenant-Code-of-Conduct" class="headerlink" title="Contributor Covenant Code of Conduct"></a>Contributor Covenant Code of Conduct</h1><h2 id="Our-Pledge"><a href="#Our-Pledge" class="headerlink" title="Our Pledge"></a>Our Pledge</h2><p>In the interest of fostering an open and welcoming environment, we as<br>contributors and maintainers pledge to making participation in our project and<br>our community a harassment-free experience for everyone, regardless of age, body<br>size, disability, ethnicity, sex characteristics, gender identity and expression,<br>level of experience, education, socio-economic status, nationality, personal<br>appearance, race, religion, or sexual identity and orientation.</p>
+<h2 id="Our-Standards"><a href="#Our-Standards" class="headerlink" title="Our Standards"></a>Our Standards</h2><p>Examples of behavior that contributes to creating a positive environment<br>include:</p>
+<ul>
+<li>Using welcoming and inclusive language</li>
+<li>Being respectful of differing viewpoints and experiences</li>
+<li>Gracefully accepting constructive criticism</li>
+<li>Focusing on what is best for the community</li>
+<li>Showing empathy towards other community members</li>
+</ul>
+<p>Examples of unacceptable behavior by participants include:</p>
+<ul>
+<li>The use of sexualized language or imagery and unwelcome sexual attention or<br>advances</li>
+<li>Trolling, insulting/derogatory comments, and personal or political attacks</li>
+<li>Public or private harassment</li>
+<li>Publishing others’ private information, such as a physical or electronic<br>address, without explicit permission</li>
+<li>Other conduct which could reasonably be considered inappropriate in a<br>professional setting</li>
+</ul>
+<h2 id="Our-Responsibilities"><a href="#Our-Responsibilities" class="headerlink" title="Our Responsibilities"></a>Our Responsibilities</h2><p>Project maintainers are responsible for clarifying the standards of acceptable<br>behavior and are expected to take appropriate and fair corrective action in<br>response to any instances of unacceptable behavior.</p>
+<p>Project maintainers have the right and responsibility to remove, edit, or<br>reject comments, commits, code, wiki edits, issues, and other contributions<br>that are not aligned to this Code of Conduct, or to ban temporarily or<br>permanently any contributor for other behaviors that they deem inappropriate,<br>threatening, offensive, or harmful.</p>
+<h2 id="Scope"><a href="#Scope" class="headerlink" title="Scope"></a>Scope</h2><p>This Code of Conduct applies both within project spaces and in public spaces<br>when an individual is representing the project or its community. Examples of<br>representing a project or community include using an official project e-mail<br>address, posting via an official social media account, or acting as an appointed<br>representative at an online or offline event. Representation of a project may be<br>further defined and clarified by project maintainers.</p>
+<h2 id="Enforcement"><a href="#Enforcement" class="headerlink" title="Enforcement"></a>Enforcement</h2><p>Instances of abusive, harassing, or otherwise unacceptable behavior may be<br>reported by contacting the project team at <a href="mailto:1107178482@qq.com">1107178482@qq.com</a>. All<br>complaints will be reviewed and investigated and will result in a response that<br>is deemed necessary and appropriate to the circumstances. The project team is<br>obligated to maintain confidentiality with regard to the reporter of an incident.<br>Further details of specific enforcement policies may be posted separately.</p>
+<p>Project maintainers who do not follow or enforce the Code of Conduct in good<br>faith may face temporary or permanent repercussions as determined by other<br>members of the project’s leadership.</p>
+<h2 id="Attribution"><a href="#Attribution" class="headerlink" title="Attribution"></a>Attribution</h2><p>This Code of Conduct is adapted from the <a href="https://www.contributor-covenant.org" target="_blank" rel="noopener">Contributor Covenant</a>, version 1.4,<br>available at <a href="https://www.contributor-covenant.org/version/1/4/code-of-conduct.html" target="_blank" rel="noopener">https://www.contributor-covenant.org/version/1/4/code-of-conduct.html</a></p>
+<p>For answers to common questions about this code of conduct, see<br><a href="https://www.contributor-covenant.org/faq" target="_blank" rel="noopener">https://www.contributor-covenant.org/faq</a></p>
+
+</div>
+
+
+  <div class="book-comments">
+    
+<script src="https://utteranc.es/client.js"
+        repo="AngelName/javascript-design-pattern"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+
+
+  </div>
+
+
+
+<script src="/js/book-post.js"></script>
+
+        </div>
+      </div>
+      <div class="column col-2 hide-lg">
+        <div class="book-post-info">
+  
+    <div class="book-post-meta">
+
+  <div class="author">
+
+    <!-- Author image -->
+    <div class="author-img">
+      
+        <figure class="avatar avatar-lg">
+          <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" alt="...">
+        </figure>
+      
+    </div>
+
+    <!-- Author title -->
+    <div class="author-title">
+      <div>AngelName</div>
+      <div>2020-06-19</div>
+    </div>
+  </div>
+
+  
+
+  <div class="divider"></div>
+</div>
+  
+
+  <div class="book-tocbot">
+</div>
+<div class="book-tocbot-menu">
+  <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+  <a onclick="go_top()">Back to top</a>
+  <a onclick="go_bottom()">Go to bottom</a>
+</div>
+
+
+<script src="/js/book-toc.js"></script>
+
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+</div>
+
+</body>
+</html>
+
+
+<script src="/js/book.js"></script>

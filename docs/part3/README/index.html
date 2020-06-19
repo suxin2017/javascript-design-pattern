@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+
+    
+      <link rel="icon" href="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" />
+    
+
+    <title>
+        
+          part3/README - JS 设计模式练习
+        
+    </title>
+
+    <!-- Spectre.css framework -->
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+    <!-- theme css & js -->
+    
+<link rel="stylesheet" href="/css/book.css">
+
+    
+<script src="/js/book.js"></script>
+
+
+    <!-- tocbot -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css">
+    
+    <!-- katex -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/zooming/2.1.1/zooming.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const zooming = new Zooming()
+    zooming.listen('.book-content img')
+})
+</script>
+
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+<body>
+
+<div class="book-container">
+  <div class="book-sidebar">
+    <div class="book-brand">
+  <a href="/">
+    <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4">
+    <span>JS 设计模式练习</span>
+  </a>
+</div>
+    <div class="book-menu">
+  <ul>
+<li><a href="/part1/README">创建型设计模式</a><ul>
+<li><a href="/part1/simple_factory">简单工厂模式</a></li>
+<li><a href="/part1/factory_function">工厂方法模式</a></li>
+<li><a href="/part1/abstract_factory">抽象工厂模式</a></li>
+<li><a href="/part1/builder_pattern">建造者模式</a></li>
+<li><a href="/part1/prototype_pattern">原型模式</a></li>
+<li><a href="/part1/singleton_pattern">单例模式</a></li>
+</ul>
+</li>
+<li><a href="/part2/README">结构型设计模式</a><ul>
+<li><a href="/part2/facede">外观模式</a></li>
+<li><a href="/part2/adapter">适配器模式</a> </li>
+<li><a href="/part2/decorator">装饰者模式</a> </li>
+<li><a href="/part2/proxy">代理模式</a></li>
+<li><a href="/part2/adapter">桥接模式</a></li>
+<li><a href="/part2/composite">组合模式</a></li>
+<li><a href="/part2/flyweight">享元模式</a></li>
+</ul>
+</li>
+<li><a href="/part3/README">行为设计模式</a><ul>
+<li><a href="/part3/templete">模版方法模式</a></li>
+<li><a href="/part3/Observer">观察者模式</a></li>
+<li><a href="/part3/state">状态模式</a></li>
+<li>❎ <a href="/part3/strategy">策略模式</a></li>
+<li><a href="/part3/chain_of_responsibility">职责链模式</a></li>
+<li><a href="/part3/command">命令模式</a></li>
+<li><a href="/part3/vistor">访问者模式</a></li>
+<li><a href="/part3/mediator">中介者模式</a></li>
+<li><a href="/part3/memento">备忘录模式</a></li>
+<li><a href="/part3/iterator">迭代器模式</a></li>
+<li><a href="/part3/interpreter">解释器模式</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+
+
+<script src="/js/book-menu.js"></script>
+
+  </div>
+
+  <div class="sidebar-toggle" onclick="sidebar_toggle()" onmouseover="add_inner()" onmouseleave="remove_inner()">
+  <div class="sidebar-toggle-inner"></div>
+</div>
+
+<script>
+function add_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.add('show')  
+}
+
+function remove_inner() {
+  let inner = document.querySelector('.sidebar-toggle-inner')
+  inner.classList.remove('show')
+}
+
+function sidebar_toggle() {
+    let sidebar_toggle = document.querySelector('.sidebar-toggle')
+    let sidebar = document.querySelector('.book-sidebar')
+    let content = document.querySelector('.off-canvas-content')
+    if (sidebar_toggle.classList.contains('extend')) { // show
+        sidebar_toggle.classList.remove('extend')
+        sidebar.classList.remove('hide')
+        content.classList.remove('extend')
+    }
+    else { // hide
+        sidebar_toggle.classList.add('extend')
+        sidebar.classList.add('hide')
+        content.classList.add('extend')
+    }
+}
+</script>
+
+  <div class="off-canvas-content">
+    <div class="columns">
+      <div class="column col-10 col-lg-12">
+        <div class="book-navbar">
+          <!-- For Responsive Layout -->
+
+<header class="navbar">
+  <section class="navbar-section">
+    <a onclick="open_sidebar()">
+      <i class="icon icon-menu"></i>
+    </a>
+  </section>
+</header>
+
+        </div>
+        <div class="book-content">
+          <div class="book-post">
+  <h1 id="第三部分"><a href="#第三部分" class="headerlink" title="第三部分"></a>第三部分</h1><h2 id="行为型设计模式"><a href="#行为型设计模式" class="headerlink" title="行为型设计模式"></a>行为型设计模式</h2><p>第一部分关注如何生成一个对象，制🧱场的奥秘</p>
+<p>第二部分关注如何拓展功能点，添砖加瓦</p>
+<p>最后关于常用设计模式的一部分，是行为型设计模式</p>
+<p>关注对象之间职责划分，算法抽象，对象之间交流</p>
+<ul>
+<li><a href="/part3/templete">模版方法模式</a><br>模版模式，定义一组算法骨架，将具体实现放置到子类去实现，让子类不改变父类就能重定义实现步骤,<br>关注对模版的拓展</li>
+<li><a href="/part3/Observer">观察者模式</a><br>观察者模式，A 触发一个动作然后通知 B， B 接受这个动作作出响应的反应， 也叫发布-订阅模式,</li>
+<li><a href="/part3/state">状态模式</a><br>当一个对象内部改变时候，会改变他的行为，这看起来改变了对象，简化逻辑分支</li>
+<li><a href="/part3/strategy.ms">策略模式</a><br>将定义的一组算法封装起来使其可以相互替换，和状态模式很想，不同的是策略模式不需要管理状态，状态之间没有依赖，封装算法</li>
+<li><a href="/part3/chain_of_responsibility">职责链模式</a><br>将同一类请求进行分解，实现请求在多个对象之间传递，突然想到koa的中间件，mvc模式</li>
+<li><a href="/part3/command">命令模式</a><br>命令模式，将请求与实现接耦并风力成独立对象，使不同的请求对客户端的实现参数化</li>
+<li><a href="/part3/vistor">访问者模式</a><br>针对于对象结构中的元素，定义在不改变该对象的前提下访问结构中元素的新方法,不改变方法，值改变当前函数运行环境</li>
+<li><a href="/part3/mediator">中介者模式</a><br>封装对象之间交互，使对象之间不再引用，降低耦合。<br>中介者和观察者模式很像，不同点在于中介这数据流动是单项的</li>
+<li><a href="/part3/memento">备忘录模式</a><br>在不破坏对象的封装的前提下，在对象外捕获并保存对象内部的状态，以便对象日后使用或者恢复 </li>
+<li><a href="/part3/iterator">迭代器模式</a><br>在不暴露对象内部结构的同事，顺序访问聚合对象内部的元素 </li>
+<li><a href="/part3/interpreter">解释器模式</a><br>给出语言文法表现形式，定义一种解释器，通过解释器解释语句中定义的意思，</li>
+</ul>
+
+</div>
+
+
+  <div class="book-comments">
+    
+<script src="https://utteranc.es/client.js"
+        repo="AngelName/javascript-design-pattern"
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
+
+
+  </div>
+
+
+
+<script src="/js/book-post.js"></script>
+
+        </div>
+      </div>
+      <div class="column col-2 hide-lg">
+        <div class="book-post-info">
+  
+    <div class="book-post-meta">
+
+  <div class="author">
+
+    <!-- Author image -->
+    <div class="author-img">
+      
+        <figure class="avatar avatar-lg">
+          <img src="https://avatars2.githubusercontent.com/u/28481035?s=460&v=4" alt="...">
+        </figure>
+      
+    </div>
+
+    <!-- Author title -->
+    <div class="author-title">
+      <div>AngelName</div>
+      <div>2020-06-19</div>
+    </div>
+  </div>
+
+  
+
+  <div class="divider"></div>
+</div>
+  
+
+  <div class="book-tocbot">
+</div>
+<div class="book-tocbot-menu">
+  <a class="book-toc-expand" onclick="expand_toc()">Expand all</a>
+  <a onclick="go_top()">Back to top</a>
+  <a onclick="go_bottom()">Go to bottom</a>
+</div>
+
+
+<script src="/js/book-toc.js"></script>
+
+</div>
+      </div>
+    </div>
+  </div>
+  
+  <a class="off-canvas-overlay" onclick="hide_canvas()"></a>
+</div>
+
+</body>
+</html>
+
+
+<script src="/js/book.js"></script>

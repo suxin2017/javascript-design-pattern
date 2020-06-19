@@ -5,6 +5,7 @@ cache: npm
 script:
 - npm install
 - npm run build
+- mv public docs
 deploy:
   provider: pages
   skip_cleanup: true
